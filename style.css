@@ -1,0 +1,217 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* border: 1px solid red; */
+}
+
+body {
+  min-height: 100vh;
+  font-family: Montserrat, sans-serif;
+  background: #d1d1d1;
+  padding-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+input[type='range'],
+button {
+  cursor: pointer;
+}
+
+.custom-video-player {
+  overflow: hidden;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 24px;
+
+  border-radius: 4px;
+
+  video {
+    height: auto;
+    width: 100%;
+
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+
+  }
+
+  .controls-and-progress_bar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    bottom: 0;
+    transform: translateY(36px);
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+    width: 100%;
+
+    background: #212121;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    transition: 0.4s ease-in-out;
+
+    /* 
+    #progressBarInput
+     */
+
+    #progressBarInput {
+      -webkit-appearance: none;
+      z-index: 2;
+      width: 100%;
+      height: 8px;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      color: #000;
+      background: #212121;
+      background: transparent;;
+      
+      cursor: pointer;
+    }
+    #progressBarInput::-webkit-slider-runnable-track {
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      border: none;
+      height: 8px;
+      border-radius: 0;
+      background: #212121;
+      background: transparent;
+    }
+    #progressBarInput::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      z-index: 2;
+      width: 4px;
+      height: 8px;
+      border-radius: 0;
+      background: #000;
+    }
+
+    /* The width of this should match the value of the range, which matches the value of the movie, oogabooga! */
+    #progressBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 8px;
+      background: #c20000;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+      padding: 8px;
+
+      .boxybox {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 12px;
+
+        color: #fff;
+
+        #playPauseBtn {}
+      }
+
+      #fullscreenBtn {}
+    }
+  }
+}
+
+.custom-video-player:hover {
+  .controls-and-progress_bar {
+    transform: translateY(0);
+  }
+}
+
+.custom-video-player:fullscreen {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  /* for a better fullscreen experience */
+}
+
+button {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+
+  background: none;
+  border: none;
+  color: #ffffff00;
+  cursor: pointer;
+
+  transition: 0.1s;
+
+  svg {
+    position: absolute;
+    fill: #fff;
+  }
+
+  svg.hidden {
+    display: none;
+  }
+  img.hidden {
+    display: none;
+  }
+}

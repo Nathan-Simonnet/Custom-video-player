@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./ressources/play.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"> -->
+    <title>Video Player</title>
+</head>
+
+<body>
+    <h1>Lecteur personnalisé</h1>
+    <div class="custom-video-player">
+        <video id="myVideo" src="./ressources/video.mp4" width="640" height="360"></video>
+        <div class="controls-and-progress_bar">
+            <input type="range" id="progressBarInput" value="0" min="0">
+            <span id="progressBar"></span>
+            <label for="progressBar" class="sr-only">Forward or rewind</label>
+            <div class="controls">
+                <div class="boxybox">
+                    <button id="playPauseBtn" aria-label="play and pause">
+                        <svg fill="#f1f1f1" id="pauseLogo" class="play-and-pause-logo hidden" width="20px" height="20px"
+                            enable-background="new 0 0 320 320" viewBox="0 0 320 320"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m112 0h-96c-8.832 0-16 7.168-16 16v288c0 8.832 7.168 16 16 16h96c8.832 0 16-7.168 16-16v-288c0-8.832-7.168-16-16-16z" />
+                            <path
+                                d="m304 0h-96c-8.832 0-16 7.168-16 16v288c0 8.832 7.168 16 16 16h96c8.832 0 16-7.168 16-16v-288c0-8.832-7.168-16-16-16z" />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                        </svg>
+                        <svg fill="#f1f1f1" id="playLogo" class="play-and-pause-logo" width="20px" height="20px"
+                            enable-background="new 0 0 320.001 320.001" viewBox="0 0 320.001 320.001"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m295.84 146.049-256-144c-4.96-2.784-11.008-2.72-15.904.128-4.928 2.88-7.936 8.128-7.936 13.824v288c0 5.696 3.008 10.944 7.936 13.824 2.496 1.44 5.28 2.176 8.064 2.176 2.688 0 5.408-.672 7.84-2.048l256-144c5.024-2.848 8.16-8.16 8.16-13.952s-3.136-11.104-8.16-13.952z" />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                        </svg>
+                        Play
+                    </button>
+                    <button id="muteBtn"  aria-label="mute and unmute">
+                        <svg fill="#f1f1f1" id="muteLogo" class="mute-logo hidden" width="20px" height="20px"
+                            enable-background="new 0 0 448.075 448.075" viewBox="0 0 448.075 448.075"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m352.021 16.075c0-6.08-3.52-11.84-8.96-14.4-5.76-2.88-12.16-1.92-16.96 1.92l-141.76 112.96 167.68 167.68z" />
+                            <path
+                                d="m443.349 420.747-416-416c-6.24-6.24-16.384-6.24-22.624 0s-6.24 16.384 0 22.624l100.672 100.704h-9.376c-9.92 0-18.56 4.48-24.32 11.52-4.8 5.44-7.68 12.8-7.68 20.48v128c0 17.6 14.4 32 32 32h74.24l155.84 124.48c2.88 2.24 6.4 3.52 9.92 3.52 2.24 0 4.8-.64 7.04-1.6 5.44-2.56 8.96-8.32 8.96-14.4v-57.376l68.672 68.672c3.136 3.136 7.232 4.704 11.328 4.704s8.192-1.568 11.328-4.672c6.24-6.272 6.24-16.384 0-22.656z" />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                        </svg>
+                        <svg fill="#f1f1f1" id="unMuteLogo" class="mute-logo" width="20px" height="20px"
+                            enable-background="new 0 0 448.019 448.019" viewBox="0 0 448.019 448.019"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m294.953 1.587c-5.568-2.656-12.128-1.952-16.928 1.92l-155.648 124.512h-74.368c-17.632 0-32 14.368-32 32v128c0 17.664 14.368 32 32 32h74.368l155.616 124.512c2.912 2.304 6.464 3.488 10.016 3.488 2.368 0 4.736-.544 6.944-1.6 5.536-2.656 9.056-8.256 9.056-14.4v-416c0-6.144-3.52-11.744-9.056-14.432z" />
+                            <path
+                                d="m385.001 110.867c-6.304-6.208-16.416-6.112-22.624.128-6.208 6.304-6.144 16.416.128 22.656 24.192 23.872 37.504 55.968 37.504 90.368s-13.312 66.496-37.504 90.368c-6.272 6.176-6.336 16.32-.128 22.624 3.136 3.168 7.264 4.736 11.36 4.736 4.064 0 8.128-1.536 11.264-4.64 30.336-29.856 47.008-70.048 47.008-113.088s-16.672-83.232-47.008-113.152z" />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                            <g />
+                        </svg>
+                        Mute</button>
+                    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+                    <label for="volumeControl" class="sr-only">volume up or down</label>
+                    <span class="progression-time"><span tabindex="0" class="current-time" aria-label="current movie time">0:00</span><span> / </span><span
+                            tabindex="0" class="total-time" aria-label="total movie time">3:46</span></span>
+                            <!-- Add span sr only focusable on top of each timer -->
+                </div>
+                <button id="fullscreenBtn">
+                    <svg id="deFullScreenLogo" width="20px" height="20px" aria-hidden="true" class="hidden" focusable="false" data-prefix="fas"
+                        data-icon="compress" class="svg-inline--fa fa-compress fa-w-14" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="#f1f1f1"
+                            d="M436 192H312c-13.3 0-24-10.7-24-24V44c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm-276-24V44c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v84H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24zm0 300V344c0-13.3-10.7-24-24-24H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-84h84c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12H312c-13.3 0-24 10.7-24 24v124c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12z">
+                        </path>
+                    </svg>
+                    <img src="./ressources/full-screen.png" id="fullScreenLogo"  width="20px" alt="">
+                    Fullscreen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
