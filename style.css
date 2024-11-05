@@ -95,6 +95,7 @@ span {
 
     bottom: 0;
     transform: translateY(36px);
+    transform: translateY(0);
 
     width: 100%;
 
@@ -183,10 +184,7 @@ span {
 
         color: #fff;
 
-        #playPauseBtn {}
       }
-
-      #fullscreenBtn {}
     }
   }
 }

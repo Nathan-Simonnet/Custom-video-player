@@ -122,9 +122,9 @@
                         Mute</button>
                     <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="1">
                     <label for="volumeControl" class="sr-only">volume up or down</label>
-                    <span class="progression-time"><span tabindex="0" class="current-time"
+                    <span class="progression-time"><span tabindex="0" class="current-time" id="currentTime"
                             aria-label="current movie time">0:00</span><span> / </span><span tabindex="0"
-                            class="total-time" aria-label="total movie time">3:46</span></span>
+                            class="total-time" id="totalTime" aria-label="total movie time">0:00</span></span>
                 </div>
                 <button id="fullscreenBtn">
                     <svg aria-label="small screen logo" id="deFullScreenLogo" width="20px" height="20px"
