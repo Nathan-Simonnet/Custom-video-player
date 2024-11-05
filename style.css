@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
 *,
 ::before,
 ::after {
@@ -49,9 +51,16 @@ li {
   border: 0;
 }
 
+h1{
+  text-align: center;
+}
 input[type='range'],
 button {
   cursor: pointer;
+}
+
+span {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .custom-video-player {
@@ -86,7 +95,6 @@ button {
 
     bottom: 0;
     transform: translateY(36px);
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
     width: 100%;
 
@@ -95,10 +103,6 @@ button {
     border-bottom-right-radius: 4px;
 
     transition: 0.4s ease-in-out;
-
-    /* 
-    #progressBarInput
-     */
 
     #progressBarInput {
       -webkit-appearance: none;
@@ -110,10 +114,12 @@ button {
       outline: none;
       color: #000;
       background: #212121;
-      background: transparent;;
-      
+      background: transparent;
+      ;
+
       cursor: pointer;
     }
+
     #progressBarInput::-webkit-slider-runnable-track {
       z-index: 2;
       display: flex;
@@ -128,13 +134,24 @@ button {
       background: #212121;
       background: transparent;
     }
+
     #progressBarInput::-webkit-slider-thumb {
       -webkit-appearance: none;
       z-index: 2;
       width: 4px;
       height: 8px;
-      border-radius: 0;
+      border-radius: 4px;
       background: #000;
+      transition: 0.1s;
+    }
+
+
+    #progressBarInput:hover,
+    #progressBarInput:focus {
+      &::-webkit-slider-thumb {
+        background: #fff;
+        transform: scale(2);
+      }
     }
 
     /* The width of this should match the value of the range, which matches the value of the movie, oogabooga! */
@@ -145,6 +162,8 @@ button {
       width: 0;
       height: 8px;
       background: #c20000;
+
+      will-change: width;
     }
 
     .controls {
@@ -211,7 +230,42 @@ button {
   svg.hidden {
     display: none;
   }
+
   img.hidden {
     display: none;
+  }
+}
+
+
+/*  =============================================================  */
+@media (hover: none) and (pointer: coarse) {
+  .custom-video-player {
+    .controls-and-progress_bar {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  h1 {
+    transform: scale(0.9);
+  }
+
+  .custom-video-player {
+    transform: scale(0.9);
+    margin: 0;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+
+  h1 {
+    transform: scale(0.9);
+  }
+
+  .custom-video-player {
+    transform: scale(0.8);
   }
 }

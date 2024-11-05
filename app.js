@@ -1,66 +1,76 @@
 
+// Timer!!
+
 const video = document.getElementById('myVideo');
+
+function logosToggler(logo1, logo2) {
+    logo1.classList.toggle('hidden');
+    logo2.classList.toggle('hidden');
+};
 
 // Play pause
 // =================================================
-
-function playOrPauseLogoDisplay(playing, logo1, logo2) {
-    if (playing) {
-        logo1.classList.remove('hidden');
-        logo2.classList.add('hidden');
-    } else {
-        logo1.classList.add('hidden');
-        logo2.classList.remove('hidden');
-    };
-};
-
+let clickTimeout;
+let clickIndex = 0
 const playPauseBtn = document.getElementById('playPauseBtn');
 const playLogo = document.getElementById('playLogo');
 const pauseLogo = document.getElementById('pauseLogo');
 
+function videoPauseOrPlayHandler() {
+    if (video.paused) {
+        video.play();
+        logosToggler(playLogo, pauseLogo);
+    } else {
+        video.pause();
+        logosToggler(playLogo, pauseLogo);
+    };
+}
+// video.addEventListener('click', videoPauseOrPlayHandler);
 video.addEventListener('click', () => {
-    if (video.paused) {
-        video.play();
-        playOrPauseLogoDisplay(false, playLogo, pauseLogo);
-    } else {
-        video.pause();
-        playOrPauseLogoDisplay('playing', playLogo, pauseLogo);
-    };
+    clickIndex++;
+    if (clickIndex === 1) {
+        clickTimeout = setTimeout(() => {
+            videoPauseOrPlayHandler();
+            clickIndex = 0;
+        }, 200);
+    }
 });
-
-playPauseBtn.addEventListener('click', () => {
-    if (video.paused) {
-        video.play();
-        playOrPauseLogoDisplay(false, playLogo, pauseLogo);
-    } else {
-        video.pause();
-        playOrPauseLogoDisplay('playing', playLogo, pauseLogo);
-    };
-});
+playPauseBtn.addEventListener('click', videoPauseOrPlayHandler);
 
 // Mute
 // =================================================
-
+let currentVolumeEqualZero = false;
 const muteBtn = document.getElementById('muteBtn');
 const muteLogo = document.getElementById('muteLogo');
 const unMuteLogo = document.getElementById('unMuteLogo');
 
 muteBtn.addEventListener('click', () => {
-    video.muted = !video.muted;
-    video.muted ? playOrPauseLogoDisplay('playing', muteLogo, unMuteLogo) : playOrPauseLogoDisplay(false, muteLogo, unMuteLogo);
+    if (!currentVolumeEqualZero) {
+        video.muted = !video.muted;
+        logosToggler(muteLogo, unMuteLogo);
+    }
 });
 
 // Volume control
 // =================================================
 
 const volumeControl = document.getElementById('volumeControl');
-
 volumeControl.addEventListener('input', () => {
-    if (video.muted) {
-        playOrPauseLogoDisplay(false, muteLogo, unMuteLogo);
-        video.muted = !video.muted;
-    };
-    video.volume = volumeControl.value;
+    // Prevent from who knows
+    if (volumeControl.value >= 0 || volumeControl.value <= 1) {
+        video.volume = volumeControl.value;
+        if (volumeControl.value == 0 && !video.muted) {
+            logosToggler(muteLogo, unMuteLogo)
+            video.muted = true;
+            currentVolumeEqualZero = true;
+        } else if (volumeControl.value > 0 && video.muted) {
+            logosToggler(muteLogo, unMuteLogo)
+            video.muted = false;
+            currentVolumeEqualZero = false;
+        }
+    } else {
+        console.log("volumeControl.value should be between 0 and 1 : " + volumeControl.value);
+    }
 });
 
 // Full screen
@@ -72,11 +82,11 @@ const videoContainer = document.querySelector('.custom-video-player');
 const deFullScreenLogo = document.getElementById('deFullScreenLogo');
 const fullScreenLogo = document.getElementById('fullScreenLogo');
 
-fullscreenBtn.addEventListener('click', () => {
+function fullScreenOrSmallScreenHandler() {
     if (!document.fullscreenElement) {
         // if (videoContainer.requestFullscreen) {
         videoContainer.requestFullscreen();
-        playOrPauseLogoDisplay(false, fullScreenLogo, deFullScreenLogo);
+        logosToggler(fullScreenLogo, deFullScreenLogo);
         // } else if (videoContainer.webkitRequestFullscreen) { // Safari
         //     videoContainer.webkitRequestFullscreen();
         // } else if (videoContainer.msRequestFullscreen) { // IE11
@@ -86,7 +96,7 @@ fullscreenBtn.addEventListener('click', () => {
     } else {
         // if (document.exitFullscreen) {
         document.exitFullscreen();
-        playOrPauseLogoDisplay('fullscreen', fullScreenLogo, deFullScreenLogo);
+        logosToggler(fullScreenLogo, deFullScreenLogo);
         // } else if (document.webkitExitFullscreen) { // Safari
         // document.webkitExitFullscreen();
         // } else if (document.msExitFullscreen) { // IE11
@@ -94,32 +104,38 @@ fullscreenBtn.addEventListener('click', () => {
         // }
         // fullscreenBtn.textContent = 'Fullscreen';
     }
+}
+fullscreenBtn.addEventListener('click', fullScreenOrSmallScreenHandler);
+// video.addEventListener('dblclick', fullScreenOrSmallScreenHandler);
+video.addEventListener('dblclick', () => {
+    clearTimeout(clickTimeout);
+    clickIndex = 0;
+    fullScreenOrSmallScreenHandler();
+    console.log(clickIndex)
 });
 
 // Well well weeeeeeell
 // ================================================
 
-// progressBarInput.value = (video.currentTime / video.duration) * 100; ?
-
 const progressBarInput = document.getElementById('progressBarInput');
 const progressBar = document.getElementById('progressBar');
 
 window.addEventListener('load', () => {
+    if (isNaN(progressBarInput.value) || isNaN(video.currentTime) || isNaN(video.duration)) {
+        console.log(progressBarInput.value, video.currentTime, video.duration)
+        throw new Error('amongus sus')
+    } else {
+        // Update progress bar as video plays
+        video.addEventListener('timeupdate', () => {
+            progressBarInput.value = Math.floor((video.currentTime * 100)) / video.duration;
+            progressBar.style.width = `${progressBarInput.value}%`
+        });
 
-    console.log(video.duration);
-    progressBarInput.min = 0;
-    progressBarInput.max = Math.floor(video.duration);
-
-    // Update progress bar as video plays
-    video.addEventListener('timeupdate', () => {
-        progressBarInput.value = Math.floor(video.currentTime);
-        progressBar.style.width = `${(Math.floor((video.currentTime * 100) ) / video.duration)}%`
-    });
-
-    // Update progress bar as video plays
-    progressBarInput.addEventListener('input', (e) => {
-        console.log(progressBarInput.value, video.currentTime)
-        video.currentTime = progressBarInput.value;
-        progressBar.style.width = `${(Math.floor((progressBarInput.value * 100)) / video.duration)}%`
-    });
+        // Update progress bar as input change
+        progressBarInput.addEventListener('input', (e) => {
+            video.currentTime = Math.floor((progressBarInput.value * video.duration)) / 100;
+            progressBar.style.width = `${progressBarInput.value}%`
+        });
+    }
 });
+

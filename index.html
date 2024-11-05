@@ -20,14 +20,14 @@
     <div class="custom-video-player">
         <video id="myVideo" src="./ressources/video.mp4" width="640" height="360"></video>
         <div class="controls-and-progress_bar">
-            <input type="range" id="progressBarInput" value="0" min="0">
+            <input type="range" id="progressBarInput" value="0" min="0" max="100">
             <span id="progressBar"></span>
             <label for="progressBar" class="sr-only">Forward or rewind</label>
             <div class="controls">
                 <div class="boxybox">
                     <button id="playPauseBtn" aria-label="play and pause">
-                        <svg fill="#f1f1f1" id="pauseLogo" class="play-and-pause-logo hidden" width="20px" height="20px"
-                            enable-background="new 0 0 320 320" viewBox="0 0 320 320"
+                        <svg aria-label="pause logo" fill="#f1f1f1" id="pauseLogo" class="play-and-pause-logo hidden"
+                            width="20px" height="20px" enable-background="new 0 0 320 320" viewBox="0 0 320 320"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m112 0h-96c-8.832 0-16 7.168-16 16v288c0 8.832 7.168 16 16 16h96c8.832 0 16-7.168 16-16v-288c0-8.832-7.168-16-16-16z" />
@@ -49,9 +49,9 @@
                             <g />
                             <g />
                         </svg>
-                        <svg fill="#f1f1f1" id="playLogo" class="play-and-pause-logo" width="20px" height="20px"
-                            enable-background="new 0 0 320.001 320.001" viewBox="0 0 320.001 320.001"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-label="play logo" fill="#f1f1f1" id="playLogo" class="play-and-pause-logo"
+                            width="20px" height="20px" enable-background="new 0 0 320.001 320.001"
+                            viewBox="0 0 320.001 320.001" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m295.84 146.049-256-144c-4.96-2.784-11.008-2.72-15.904.128-4.928 2.88-7.936 8.128-7.936 13.824v288c0 5.696 3.008 10.944 7.936 13.824 2.496 1.44 5.28 2.176 8.064 2.176 2.688 0 5.408-.672 7.84-2.048l256-144c5.024-2.848 8.16-8.16 8.16-13.952s-3.136-11.104-8.16-13.952z" />
                             <g />
@@ -72,9 +72,9 @@
                         </svg>
                         Play
                     </button>
-                    <button id="muteBtn"  aria-label="mute and unmute">
-                        <svg fill="#f1f1f1" id="muteLogo" class="mute-logo hidden" width="20px" height="20px"
-                            enable-background="new 0 0 448.075 448.075" viewBox="0 0 448.075 448.075"
+                    <button id="muteBtn" aria-label="mute and unmute">
+                        <svg aria-label="mute logo" fill="#f1f1f1" id="muteLogo" class="mute-logo hidden" width="20px"
+                            height="20px" enable-background="new 0 0 448.075 448.075" viewBox="0 0 448.075 448.075"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m352.021 16.075c0-6.08-3.52-11.84-8.96-14.4-5.76-2.88-12.16-1.92-16.96 1.92l-141.76 112.96 167.68 167.68z" />
@@ -96,8 +96,8 @@
                             <g />
                             <g />
                         </svg>
-                        <svg fill="#f1f1f1" id="unMuteLogo" class="mute-logo" width="20px" height="20px"
-                            enable-background="new 0 0 448.019 448.019" viewBox="0 0 448.019 448.019"
+                        <svg aria-label="unmute logo" fill="#f1f1f1" id="unMuteLogo" class="mute-logo" width="20px"
+                            height="20px" enable-background="new 0 0 448.019 448.019" viewBox="0 0 448.019 448.019"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m294.953 1.587c-5.568-2.656-12.128-1.952-16.928 1.92l-155.648 124.512h-74.368c-17.632 0-32 14.368-32 32v128c0 17.664 14.368 32 32 32h74.368l155.616 124.512c2.912 2.304 6.464 3.488 10.016 3.488 2.368 0 4.736-.544 6.944-1.6 5.536-2.656 9.056-8.256 9.056-14.4v-416c0-6.144-3.52-11.744-9.056-14.432z" />
@@ -120,21 +120,22 @@
                             <g />
                         </svg>
                         Mute</button>
-                    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+                    <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="1">
                     <label for="volumeControl" class="sr-only">volume up or down</label>
-                    <span class="progression-time"><span tabindex="0" class="current-time" aria-label="current movie time">0:00</span><span> / </span><span
-                            tabindex="0" class="total-time" aria-label="total movie time">3:46</span></span>
-                            <!-- Add span sr only focusable on top of each timer -->
+                    <span class="progression-time"><span tabindex="0" class="current-time"
+                            aria-label="current movie time">0:00</span><span> / </span><span tabindex="0"
+                            class="total-time" aria-label="total movie time">3:46</span></span>
                 </div>
                 <button id="fullscreenBtn">
-                    <svg id="deFullScreenLogo" width="20px" height="20px" aria-hidden="true" class="hidden" focusable="false" data-prefix="fas"
-                        data-icon="compress" class="svg-inline--fa fa-compress fa-w-14" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <svg aria-label="small screen logo" id="deFullScreenLogo" width="20px" height="20px"
+                        aria-hidden="true" class="hidden" focusable="false" data-prefix="fas" data-icon="compress"
+                        class="svg-inline--fa fa-compress fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512">
                         <path fill="#f1f1f1"
                             d="M436 192H312c-13.3 0-24-10.7-24-24V44c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm-276-24V44c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v84H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24zm0 300V344c0-13.3-10.7-24-24-24H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-84h84c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12H312c-13.3 0-24 10.7-24 24v124c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12z">
                         </path>
                     </svg>
-                    <img src="./ressources/full-screen.png" id="fullScreenLogo"  width="20px" alt="">
+                    <img src="./ressources/full-screen.png" id="fullScreenLogo" width="20px" alt="">
                     Fullscreen
                 </button>
             </div>
